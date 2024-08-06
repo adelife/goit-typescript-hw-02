@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {FC,  useState, useEffect } from "react";
 import "./App.css";
 import SearchBar from "./components/SearchBar/SearchBar";
 import toast, { Toaster } from "react-hot-toast";
@@ -8,17 +8,21 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import { getPhotos } from "./services/images-api";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
+import {Data, ModalWindow, Pictures} from './App.types';
+// import { string } from "prop-types";
 
-function App() {
-  const [query, setQuery] = useState("");
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false); // Loader
-  const [error, setError] = useState(null); // ErrorMessage
-  const [page, setPage] = useState(1);
-  const [visible, setVisible] = useState(false); // LoadMoreBtn
-  const [showModal, setShowModal] = useState(false);
-  const [modalUrl, setModalUrl] = useState("");
-  const [modalAlt, setModalAlt] = useState("");
+interface Props{}
+
+const App : FC <Props> = () => {
+  const [query, setQuery] = useState<string>("");
+  const [images, setImages] = useState<Pictures[]>([]);
+  const [loading, setLoading] = useState<boolean>(false); // Loader
+  const [error, setError] = useState<boolean>(false); // ErrorMessage
+  const [page, setPage] = useState<number>(1);
+  const [visible, setVisible] = useState<boolean>(false); // LoadMoreBtn
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalUrl, setModalUrl] = useState<string>("");
+  const [modalAlt, setModalAlt] = useState<string>("");
 
   useEffect(() => {
     if (!query) return;
@@ -33,7 +37,7 @@ function App() {
         setImages((prevState) => [...prevState, ...results]);
         setVisible(page < Math.ceil(total / total_pages));
       } catch (error) {
-        setError(error);
+        // setError(error),
         toast.error("Can't be empty!");
       } finally {
         setLoading(false);
@@ -42,7 +46,7 @@ function App() {
     fetchData();
   }, [query, page]);
 
-  const handleSubmit = (value) => {
+  const handleSubmit = (value : string) => {
     setQuery(value);
     setImages([]);
     setPage(1);
@@ -54,7 +58,7 @@ function App() {
     setPage((prevState) => prevState + 1);
   };
 
-  const handleOpen = (urls, description) => {
+  const handleOpen = (urls: ModalWindow, description : string) => {
     setShowModal(true);
     setModalUrl(urls.regular); 
     setModalAlt(description);

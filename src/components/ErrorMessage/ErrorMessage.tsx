@@ -1,3 +1,7 @@
+interface ErrorMessageProps {
+  message?: string;
+}
+
 const ErrorMessage = ({ message = "" }) => {
     return (
       <p>

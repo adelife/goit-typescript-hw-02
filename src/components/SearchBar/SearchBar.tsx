@@ -4,7 +4,11 @@ import { Formik, Form, Field } from "formik";
 import css from "./SearchBar.module.css";
 import PropTypes from "prop-types";
 
-const SearchBar = ({ onSubmit }) => {
+interface SearchBarProps {
+  onSubmit: (values: string) => void;
+}
+
+const SearchBar = ({ onSubmit }: SearchBarProps) => {
   const handleSubmit = (values, { resetForm }) => {
     if (!values.search.trim()) {
       toast.error("Can't be empty!");

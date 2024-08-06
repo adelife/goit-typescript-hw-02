@@ -1,6 +1,11 @@
 import css from "./ImageCard.module.css";
+import { ModalWindow, Pictures } from '../../App.types';
 
-const ImageCard = ({ description, urls, handleOpen }) => {
+interface ImageCardProps {
+  onImageClick: (image: ModalWindow) => void;
+}
+
+const ImageCard = ({ description, urls, handleOpen } : ImageCardProps) => {
   return (
     <div className={css.card} onClick={() => handleOpen(urls, description)}>
       <img src={urls.small} alt={description} />
