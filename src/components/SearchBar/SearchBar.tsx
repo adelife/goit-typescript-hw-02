@@ -8,8 +8,12 @@ interface SearchBarProps {
   onSubmit: (values: string) => void;
 }
 
+interface resetFormType{
+  resetForm: () => void;
+}
+
 const SearchBar = ({ onSubmit }: SearchBarProps) => {
-  const handleSubmit = (values, { resetForm }) => {
+  const handleSubmit = (values: String, { resetForm } : resetFormType) : void => {
     if (!values.search.trim()) {
       toast.error("Can't be empty!");
       return;
