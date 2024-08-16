@@ -8,7 +8,7 @@ import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import { getPhotos } from "./services/images-api";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
-import {Data, ModalWindow, Pictures} from './App.types';
+import {ModalWindow, Pictures} from './App.types';
 // import { string } from "prop-types";
 
 interface Props{}
@@ -58,10 +58,10 @@ const App : FC <Props> = () => {
     setPage((prevState) => prevState + 1);
   };
 
-  const handleOpen = (urls: ModalWindow, description : string) => {
+  const handleOpen = (modalData: ModalWindow) => {
     setShowModal(true);
-    setModalUrl(urls.regular); 
-    setModalAlt(description);
+    setModalUrl(modalData.urls.regular); 
+    setModalAlt(modalData.description);
   };
   const handleClose = () => {
     setShowModal(false);

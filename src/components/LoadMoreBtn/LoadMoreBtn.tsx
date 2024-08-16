@@ -3,6 +3,8 @@ import css from "./LoadMoreBtn.module.css";
 
 interface LoadMoreBtnProps {
   onClick: () => void;
+  children: React.ReactNode;
+  disabled: Boolean;
 }
 
 const LoadMoreBtn = ({ children, onClick, disabled }: LoadMoreBtnProps) => {
